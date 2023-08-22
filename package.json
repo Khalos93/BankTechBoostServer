@@ -1,0 +1,11 @@
+{
+  "name": "bank-tech-boost-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "script": "node --watch server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
