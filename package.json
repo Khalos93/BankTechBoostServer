@@ -4,8 +4,15 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "script": "node --watch server.js"
+    "start": "node --watch server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "knex": "^2.5.1",
+    "mysql": "^2.18.1"
+  }
 }
