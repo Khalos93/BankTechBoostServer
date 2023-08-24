@@ -4,19 +4,19 @@
  */
 exports.up = function (knex) {
   return knex.schema
-    .createTable('obbligations', table => {
-      table.increments('obbligation_id').primary();
-      table.string('obbligation_name').notNullable();
+    .createTable('obligation', table => {
+      table.increments('id').primary();
+      table.string('name').notNullable();
       table.string('status').notNullable();
     })
-    .createTable('prices', table => {
-      table.increments('prices_id').primary();
-      table.integer('price_value').notNullable();
-      table.date('price_date').notNullable();
+    .createTable('price', table => {
+      table.increments('id').primary();
+      table.float('value').notNullable();
+      table.date('date').notNullable();
       table
         .integer('bond_id')
         .unsigned()
-        .references('obbligations.obbligation_id')
+        .references('obligation.id')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
     });
@@ -27,5 +27,5 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  return knex.schema.dropTable('prices').dropTable('obbligations');
+  return knex.schema.dropTable('price').dropTable('obligation');
 };
