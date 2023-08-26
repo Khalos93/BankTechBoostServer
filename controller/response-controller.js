@@ -20,7 +20,7 @@ exports.getAll = async (req, res) => {
     const prices = await knex('price');
 
     for (let i = 0; i < prices.length; i++) {
-      const elI = prices[i];
+      const priceEl = prices[i];
       const newElPrice = {
         date: prices[i].date,
         value: prices[i].value
@@ -29,7 +29,7 @@ exports.getAll = async (req, res) => {
       for (let y = 0; y < result.length; y++) {
         const elY = result[y];
 
-        if (elI.bond_id === elY.id) {
+        if (priceEl.bond_id === elY.id) {
           elY.value.push(newElPrice);
         }
       }
