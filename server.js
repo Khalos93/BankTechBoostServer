@@ -10,7 +10,8 @@ app.use(express.json());
 
 app.use(cors());
 
-app.get('/', bondsRoutes);
+app.use('/', bondsRoutes);
+// app.get('/detail/:id', bondsRoutes);
 
 app.use((req, res, next) => {
   console.log(`we just got a request!`);

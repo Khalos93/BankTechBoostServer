@@ -21,9 +21,15 @@ exports.getAll = async (req, res) => {
 
     for (let i = 0; i < prices.length; i++) {
       const priceEl = prices[i];
+
+      const inputDate = priceEl.date;
+      const parsedDate = new Date(inputDate);
+      const formattedDate = parsedDate.toISOString().split('T')[0];
+
       const newElPrice = {
-        date: prices[i].date,
-        value: prices[i].value
+        id: priceEl.id,
+        date: formattedDate,
+        value: priceEl.value
       };
 
       for (let y = 0; y < result.length; y++) {
@@ -40,5 +46,30 @@ exports.getAll = async (req, res) => {
     res.status(500).json({
       message: `${error}`
     });
+  }
+};
+
+exports.getOne = async (req, res) => {
+  try {
+    const bond = await knex('obligation')
+      .where({
+        'obligation.id': req.params.id
+      })
+      .first();
+    const newBond = {
+      id: bond.id,
+      name: bond.name,
+      status: bond.status
+    };
+
+    const spreadValues = await knex('price').where({
+      'price.bond_id': req.params.id
+    });
+
+    newBond.spreadValues = spreadValues;
+
+    res.json(newBond);
+  } catch (error) {
+    res.status(500).json({ message: `${error}` });
   }
 };
